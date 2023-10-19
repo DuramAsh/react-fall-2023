@@ -1,0 +1,26 @@
+.btn {
+    color: royalblue;
+    width: 150px;
+    height: 60px;
+    font-size: 18px;
+    padding: 5px;
+    margin: 10px;
+    text-align: center;
+    border-radius: 12px;
+    box-shadow: gray 2px 2px;
+}
+
+.btn:hover {
+    color: red;
+    cursor: pointer;
+}
+
+.btn:active {
+    box-shadow: none;
+}
+
+@media screen and (max-device-width: 650px) {
+    .btn {
+        font-size: 14px;
+    }
+}

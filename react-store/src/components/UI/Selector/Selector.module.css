@@ -1,0 +1,11 @@
+.mySelect {
+    font-size: 18px;
+    text-align: center;
+    cursor: pointer;
+    width: 50%;
+    margin: 10px auto;
+    padding: 5px;
+    border-radius: 8px;
+    background: mintcream;
+    border: 0;
+}

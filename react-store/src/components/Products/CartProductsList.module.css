@@ -1,0 +1,32 @@
+.productList {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    font-size: 10px;
+}
+
+.product {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    text-align: center;
+    margin: 5px;
+    padding: 5px;
+    width: 500px;
+    border: 2px solid lightblue;
+}
+
+.info {
+    display: flex;
+    flex-direction: row;
+    width: 200px;
+}
+
+.product h3 {
+    overflow-wrap: break-word;
+}
+
+.product img {
+    width: 25px;
+}
