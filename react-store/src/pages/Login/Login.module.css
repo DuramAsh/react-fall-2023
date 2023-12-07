@@ -1,0 +1,82 @@
+/* css for login page */
+
+.Login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.Login__logo {
+  width: 100px;
+  margin-bottom: 20px;
+}
+
+.Login__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+.Login__title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.Login__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.Login__input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.Login__button {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #f0c14b;
+  cursor: pointer;
+}
+
+.Login__button:hover {
+  background-color: #ddb347;
+}
+
+.Login__link {
+  text-decoration: none;
+  color: #f0c14b;
+  font-weight: 500;
+}
+
+.Login__link:hover {
+  text-decoration: underline;
+}
+
+.Login__error {
+  color: red;
+  font-size: 0.8rem;
+  margin-bottom: 10px;
+}
+
+.Login__success {
+  color: green;
+  font-size: 0.8rem;
+  margin-bottom: 10px;
+}

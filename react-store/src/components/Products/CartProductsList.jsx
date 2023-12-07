@@ -8,7 +8,7 @@ const CartProductsList = ({products, onClick}) => {
       {products.map(product => (
         <div key={product.id} className={classes.product}>
           <div className={classes.info}>
-            <img src={product.imgURLs[0]} alt={product.id}></img>
+            <img src={product.image} alt={product.id}></img>
             <h3>{product.title}</h3>
             <h3>{[product.price, "₸"].join('')}</h3>
           </div>

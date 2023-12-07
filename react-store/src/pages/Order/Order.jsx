@@ -1,18 +1,55 @@
 import React from 'react';
-import classes from './Order.module.css'
+import { useState } from 'react';
+import useToken from '../../hooks/useToken';
+import axios from 'axios';
+import classes from './Order.module.css';
+import { formatDate } from '../../utils/utils';
+import Loader from '../../components/UI/Loader/Loader';
+import CustomButton from '../../components/UI/CustomButton/CustomButton';
+import { Link } from 'react-router-dom';
 
 const Order = () => {
-  return (
-    <>
-      <img className={classes.img} alt={"some img"}
-        src={'https://www.pmexamstudy.com/wp-content/uploads/2020/07/whatsapp-button.png'} onClick={() => {
-          const link = 'https://api.whatsapp.com/send/?phone=77775725184&text=Здравствуйте%21+Я+хотел+бы+сделать+заказ%3A%0D%0A'
-          window.open(link, '_blank')
-          // const link = 'Проконсультируйте+меня%2C+пожалуйста&type=phone_number&app_absent=0'
-        }
-        }></img>
-    </>
+  const [orders, setOrders] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const { email, token } = useToken();
+
+  // use useEffect to fetch orders on page load
+  React.useEffect(() => {
+    const fetchOrders = async () => {
+      const response = await axios.get('https://store-back-6ylx.onrender.com' + '/api/orders/' + email);
+      setOrders(response.data);
+      setIsLoading(false);
+    };
+    fetchOrders();
+  }, [email, token]);
+
+  if (email === "") return (
+    <div>
+      <h1>Вы не авторизованы</h1>
+      <Link to={'/'}>
+        <CustomButton>На главную</CustomButton>
+      </Link>
+    </div>
   );
-};
+
+  return !isLoading ? (
+    <div className={classes.Order}>
+      <Link to={'/'}>
+        <CustomButton>На главную</CustomButton>
+      </Link>
+      <h1>Заказы пользователя {email}</h1>
+      <div className={classes.Order__form}>
+        {orders.map(order => (
+          <div key={order.id} className={classes.Order__item}>
+            <h3>Заказ №{order.id}</h3>
+            <p>Дата заказа: {formatDate(order.created_at)}</p>
+            <br />
+          </div>
+        ))}
+      </div>
+    </div>
+  ) : (<Loader />);
+}
 
 export default Order;
