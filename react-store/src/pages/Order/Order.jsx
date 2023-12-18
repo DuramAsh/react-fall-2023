@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import useToken from '../../hooks/useToken';
 import axios from 'axios';
 import classes from './Order.module.css';
@@ -14,14 +14,16 @@ const Order = () => {
 
   const { email, token } = useToken();
 
-  // use useEffect to fetch orders on page load
-  React.useEffect(() => {
+  useEffect(() => {
     const fetchOrders = async () => {
       const response = await axios.get('https://store-back-6ylx.onrender.com' + '/api/orders/' + email);
       setOrders(response.data);
       setIsLoading(false);
     };
-    fetchOrders();
+
+    if (email !== "") {
+      fetchOrders();
+    }
   }, [email, token]);
 
   if (email === "") return (
@@ -35,20 +37,28 @@ const Order = () => {
 
   return !isLoading ? (
     <div className={classes.Order}>
-      <Link to={'/'}>
-        <CustomButton>На главную</CustomButton>
-      </Link>
       <h1>Заказы пользователя {email}</h1>
       <div className={classes.Order__form}>
-        {orders.map(order => (
-          <div key={order.id} className={classes.Order__item}>
-            <h3>Заказ №{order.id}</h3>
-            <p>Дата заказа: {formatDate(order.created_at)}</p>
-            <br />
+        {orders === null ? (
+          <div className={classes.Order__noOrders}>
+            <h2>У вас нет заказов</h2>
           </div>
-        ))}
+        ) : (
+          orders.map(order => (
+            <div key={order.id} className={classes.Order__item} >
+              <h3>Заказ №{order.id}</h3>
+              <p>Сумма заказа: {order.amount}₸</p>
+              <p>Дата заказа: {formatDate(order.created_at)}</p>
+              <br />
+            </div>
+          ))
+        )}
+        <Link to={'/'}>
+          <CustomButton>На главную</CustomButton>
+        </Link>
+
       </div>
-    </div>
+    </div >
   ) : (<Loader />);
 }
 
